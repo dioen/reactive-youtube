@@ -15,31 +15,11 @@ class NewsFromSubscriptionsComponent extends Component {
         this._LastSubscriptionsVideosService = new LastSubscriptionsVideosService();
         this._LocalStorageService = new LocalStorageService();
 
-        this.handleSubscribeButtonClick = this.handleSubscribeButtonClick.bind(this);
-        this.getLatestVideos = this.getLatestVideos.bind(this);
-
-        (this._LocalStorageService.getUserData()) ?
-            null
-            :
-            this._LocalStorageService.setUserData();
-
-        this.checkForNewSubscriptionsVideos = this.checkForNewSubscriptionsVideos.bind(this);
+        if (this._LocalStorageService.getUserData()) this._LocalStorageService.setUserData();
     }
 
-    windowActiveModeEvent = () => {
-        const list = document.getElementById('subscriptions-list');
-        list.classList.remove('active');
-    }
-
-    componentDidMount() {
-        this.checkForNewSubscriptionsVideos();
-        document.body.addEventListener('click', this.windowActiveModeEvent);
-        this.checkNewSubscriptionsInterval = setInterval(this.checkForNewSubscriptionsVideos, 1200000);
-    }
-
-    componentWillUnmount = () => {
-        document.body.removeEventListener('click', this.windowActiveModeEvent);
-        clearInterval(this.checkNewSubscriptionsInterval);
+    addNotifyClassName = () => {
+        document.getElementById('new-subscriptions-notify-bell').classList.add('notify');
     }
 
     checkForNewSubscriptionsVideos = () => {
@@ -54,38 +34,50 @@ class NewsFromSubscriptionsComponent extends Component {
             });
     }
 
-    addNotifyClassName = () => {
-        document.getElementById('new-subscriptions-notify-bell').classList.add('notify');
-    }
-
-    removeNotifyClassName = () => {
-        document.getElementById('new-subscriptions-notify-bell').classList.remove('notify');
-    }
-
-    getLatestVideos(channelsWithLatestVideos) {
+    getLatestVideos = (channelsWithLatestVideos) => {
         const videos = channelsWithLatestVideos.map(channel => channel.items);
         const concatedVideos = [].concat(...videos);
         const sortedVideosByPublishDate = concatedVideos.sort(this.sortByDate);
         return sortedVideosByPublishDate;
     }
 
-    sortByDate = (firstElement, secondElement) => {
-        return new Date(secondElement.snippet.publishedAt) - new Date(firstElement.snippet.publishedAt);
-    }
-
     handleSubscribeButtonClick = (e) => {
         e.preventDefault();
 
         this.checkForNewSubscriptionsVideos()
-        .then(() => {
-            const list = document.getElementById('subscriptions-list');
-            list.classList.toggle('active');
-            document.getElementById('new-subscriptions-notify-bell').classList.remove('notify');
-            this._LocalStorageService.setUserData();
-        });
+            .then(() => {
+                const list = document.getElementById('subscriptions-list');
+                list.classList.toggle('active');
+                document.getElementById('new-subscriptions-notify-bell').classList.remove('notify');
+                this._LocalStorageService.setUserData();
+            });
     }
 
-    render() {
+    removeNotifyClassName = () => {
+        document.getElementById('new-subscriptions-notify-bell').classList.remove('notify');
+    }
+
+    sortByDate = (firstElement, secondElement) => {
+        return new Date(secondElement.snippet.publishedAt) - new Date(firstElement.snippet.publishedAt);
+    }
+
+    windowActiveModeEvent = () => {
+        const list = document.getElementById('subscriptions-list');
+        list.classList.remove('active');
+    }
+
+    componentDidMount = () => {
+        this.checkForNewSubscriptionsVideos();
+        document.body.addEventListener('click', this.windowActiveModeEvent);
+        this.checkNewSubscriptionsInterval = setInterval(this.checkForNewSubscriptionsVideos, 1200000);
+    }
+
+    componentWillUnmount = () => {
+        document.body.removeEventListener('click', this.windowActiveModeEvent);
+        clearInterval(this.checkNewSubscriptionsInterval);
+    }
+
+    render = () => {
         return (
             <div id="new-subscriptions-notify-bell" className="subscriptions-news-bell-icon-wrapper">
                 <div className="icon-bell-alt" onClick={this.handleSubscribeButtonClick}></div>

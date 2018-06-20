@@ -12,7 +12,7 @@ class RelatedComponent extends Component {
         this._VideoListService = new VideoListService();
     }
 
-    chooseVideo(relatedVideosArray) {
+    chooseVideo = (relatedVideosArray) => {
         let relatedVideo;
         for (let i = 0; i < relatedVideosArray.length; i++) {
             if (this.props.related.alreadyPlayed.indexOf(relatedVideosArray[i].id) < 0) {
@@ -34,7 +34,7 @@ class RelatedComponent extends Component {
             });
     }
 
-    render() {
+    render = () => {
         return (
             (this.props.related.relatedVideo.id !== '') ?
                 <div className="next-video-wrapper col-md-12">

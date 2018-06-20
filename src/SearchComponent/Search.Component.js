@@ -10,11 +10,11 @@ class SearchComponent extends Component {
         super(props)
     }
 
-    loadList() {
+    loadList = () => {
         this.props.loadVideosListSearched(this.refs.searchValue.value);
     }
 
-    render() {
+    render = () => {
         return (
             <div className="form-wrapper">
                 <div className="col-md-3 nav-logo-wrapper">

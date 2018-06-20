@@ -1,7 +1,7 @@
 export default class GoogleFileService {
     constructor() { }
 
-    createFileWithJSONContent(data) {
+    createFileWithJSONContent = (data) => {
         const boundary = '-------314159265358979323846';
         const delimiter = "\r\n--" + boundary + "\r\n";
         const close_delim = "\r\n--" + boundary + "--";
@@ -25,7 +25,44 @@ export default class GoogleFileService {
         return multipartRequestBody;
     }
 
-    saveFileOnDrive(data) {
+    ifFileExist = () => {
+        return new Promise((resolve, reject) => {
+            gapi.client.load('drive', 'v2',
+                () => {
+                    let request = gapi.client.drive.files.list({
+                        q: "title='ytsettings.json'"
+                    });
+                    request.execute((response) => {
+                        (response.items.length > 0) ?
+                            resolve({
+                                response: true,
+                                id: response.items[0].id
+                            })
+                            :
+                            resolve(false);
+                    });
+                });
+        });
+    }
+
+    loadFileFromDrive = (fileId) => {
+        return new Promise((resolve, reject) => {
+            gapi.client.load('drive', 'v2',
+                () => {
+                    let request = gapi.client.drive.files.get({
+                        fileId: fileId,
+                        mimeType: 'text/json',
+                        alt: 'media'
+                    });
+
+                    request.execute((response) => {
+                        resolve(response);
+                    });
+                });
+        });
+    }
+
+    saveFileOnDrive = (data) => {
         return new Promise((resolve, reject) => {
             let multipartRequestBody = this.createFileWithJSONContent(data);
             const boundary = '-------314159265358979323846';
@@ -46,48 +83,9 @@ export default class GoogleFileService {
                 resolve(response);
             });
         });
-
     }
 
-    loadFileFromDrive(fileId) {
-        return new Promise((resolve, reject) => {
-            gapi.client.load('drive', 'v2',
-                () => {
-                    let request = gapi.client.drive.files.get({
-                        fileId: fileId,
-                        mimeType: 'text/json',
-                        alt: 'media'
-                    });
-
-                    request.execute((response) => {
-                        resolve(response);
-                    });
-                });
-        });
-    }
-
-    ifFileExist() {
-        return new Promise((resolve, reject) => {
-            gapi.client.load('drive', 'v2',
-                () => {
-                    let request = gapi.client.drive.files.list({
-                        q: "title='ytsettings.json'"
-                    });
-                    request.execute((response) => {
-                        (response.items.length > 0) ?
-                            resolve({
-                                response: true,
-                                id: response.items[0].id
-                            })
-                            :
-                            resolve(false);
-                    });
-                });
-        });
-
-    }
-
-    updateFileOnDriveTest(fileId, data) {
+    updateFileOnDriveTest = (fileId, data) => {
         return new Promise((resolve, reject) => {
             this.loadFileFromDrive(fileId)
                 .then((response) => {
@@ -115,7 +113,7 @@ export default class GoogleFileService {
         });
     }
 
-    updateFileOnDrive(fileId, item) {
+    updateFileOnDrive = (fileId, item) => {
         return new Promise((resolve, reject) => {
             this.loadFileFromDrive(fileId)
                 .then((response) => {

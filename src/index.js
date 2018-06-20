@@ -22,14 +22,15 @@ class MainComponent extends Component {
         super(props)
         this.state = store.getState();
 
-        store.subscribe(() => {
-            console.log(store.getState());
-            this.setState(store.getState());
-            console.log('set state');
-        });
+        /* Uncomment when in dev mode */
+        // store.subscribe(() => {
+        //     console.log(store.getState());
+        //     this.setState(store.getState());
+        //     console.log('set state');
+        // });
     }
 
-    render() {
+    render = () => {
         return (
             <div className="main-window">
                 <SearchComponent />

@@ -12,11 +12,6 @@ class AddToListComponent extends Component {
         this._Service = new GoogleFileService();
         this.element = this.props.element;
 
-        this.addElement = this.addElement.bind(this);
-        this.mapLists = this.mapLists.bind(this);
-        this.toggleShowMenu = this.toggleShowMenu.bind(this);
-        this.getMenu = this.getMenu.bind(this);
-
         this.state = {
             folders_lists: {
                 lists: [],
@@ -26,29 +21,13 @@ class AddToListComponent extends Component {
         }
     }
 
-    componentDidUpdate() {
-        this.element = this.props.element;
+    addElement = (elementName) => {
+        this._FoldersService.addItemToFolder(this.state.folders_lists.googleFileContent.settings, this.element, elementName, this.props.google_file_id)
+            .then(reponse => this._FoldersService.getFolder(this.props.google_file_id, this.props.user_actual_folder.absolute_path)
+                .then(response => this.props.setUserActualFolder(this.props.user_actual_folder.absolute_path)))
     }
 
-    toggleShowMenu() {
-        this.setState({
-            folders_lists: {
-                show: false,
-                lists: this.state.folders_lists.lists,
-                googleFileContent: this.state.folders_lists.googleFileContent
-            }
-        });
-    }
-
-    componentDidMount() {
-        window.addEventListener('click', this.toggleShowMenu);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('click', this.toggleShowMenu);
-    }
-
-    getMenu() {
+    getMenu = () => {
         this._FoldersService.getAllFoldersList(this.props.google_file_id)
             .then(response => {
                 this.setState({
@@ -62,23 +41,39 @@ class AddToListComponent extends Component {
             });
     }
 
-    addElement(elementName) {
-        this._FoldersService.addItemToFolder(this.state.folders_lists.googleFileContent.settings, this.element, elementName, this.props.google_file_id)
-            .then(reponse => this._FoldersService.getFolder(this.props.google_file_id, this.props.user_actual_folder.absolute_path)
-                .then(response => this.props.setUserActualFolder(this.props.user_actual_folder.absolute_path)))
+    mapLists = (element, index) => {
+        return <div className="folders-list-element" key={index} onClick={() => this.addElement(element)}>{element.split("/").join("➞").slice(0, element.length - 1)}</div>
     }
 
-    showMenu(x, y) {
+    showMenu = (x, y) => {
         menu.style.left = x + 'px';
         menu.style.top = y + 'px';
         menu.classList.add('show-menu');
     }
 
-    mapLists(element, index) {
-        return <div className="folders-list-element" key={index} onClick={() => this.addElement(element)}>{element.split("/").join("➞").slice(0, element.length - 1)}</div>
+    toggleShowMenu = () => {
+        this.setState({
+            folders_lists: {
+                show: false,
+                lists: this.state.folders_lists.lists,
+                googleFileContent: this.state.folders_lists.googleFileContent
+            }
+        });
     }
 
-    render() {
+    componentDidMount = () => {
+        window.addEventListener('click', this.toggleShowMenu);
+    }
+
+    componentWillUnmount = () => {
+        window.removeEventListener('click', this.toggleShowMenu);
+    }
+
+    componentDidUpdate = () => {
+        this.element = this.props.element;
+    }
+
+    render = () => {
         return (
             <div>
                 <div className="icon-list-add list-add-icon" onClick={this.getMenu}></div>

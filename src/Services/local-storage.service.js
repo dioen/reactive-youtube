@@ -1,5 +1,13 @@
 export class LocalStorageService {
-    constructor() {}
+    constructor() { }
+
+    clearLocalStorage = () => {
+        return localStorage.clear();
+    }
+
+    getUserData = (storageName = 'userSettings') => {
+        return JSON.parse(localStorage.getItem(storageName));
+    }
 
     setUserData = (dataToStoreObject = null, storageName = 'userSettings') => {
         this.clearLocalStorage();
@@ -11,13 +19,5 @@ export class LocalStorageService {
         }
         const stringifyData = JSON.stringify(userSettings);
         localStorage.setItem(storageName, stringifyData);
-    }
-
-    getUserData = (storageName = 'userSettings') => {
-        return JSON.parse(localStorage.getItem(storageName));
-    }
-
-    clearLocalStorage = () => {
-        return localStorage.clear();
     }
 }

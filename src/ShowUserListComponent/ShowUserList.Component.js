@@ -7,14 +7,16 @@ class ShowUserListComponent extends Component {
     constructor(props) {
         super(props)
 
-        this.loadUserList = this.loadUserList.bind(this);
         this._FoldersService = new FoldersService();
-
-        this.createFolder = this.createFolder.bind(this);
-        this.setActiveClass = this.setActiveClass.bind(this);
     }
 
-    loadUserList() {
+    createFolder = () => {
+        this._FoldersService.getFolder(this.props.user_login.google.google_file_id).then(response => {
+            this._FoldersService.createFolder("test", "testFolderName", this.props.user_login.google.google_file_id);
+        });
+    }
+
+    loadUserList = () => {
         this._FoldersService.getGoogleFileContent(this.props.user_login.google.google_file_id)
             .then(response => {
                 this.props.loadUserSettings(response.settings);
@@ -25,23 +27,16 @@ class ShowUserListComponent extends Component {
             });
     }
 
-    createFolder() {
-        this._FoldersService.getFolder(this.props.user_login.google.google_file_id).then(response => {
-            this._FoldersService.createFolder("test", "testFolderName", this.props.user_login.google.google_file_id);
-        });
+    removeActiveClassFromSiblings = (element) => {
+        element.target.parentNode.childNodes.forEach(child => child.classList.remove('active'));
     }
 
-    setActiveClass(e) {
+    setActiveClass = (e) => {
         this.removeActiveClassFromSiblings(e);
         e.target.classList.add('active');
     }
 
-    removeActiveClassFromSiblings(element) {
-        element.target.parentNode.childNodes.forEach(child => child.classList.remove('active'));
-
-    }
-
-    render() {
+    render = () => {
         return (
             <div className="user-settings-folder">
                 {(this.props.user_login.google.logged_in) ?

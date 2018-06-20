@@ -17,40 +17,9 @@ class VideoElementComponent extends Component {
         };
 
         this._FoldersService = new FoldersService();
-        this.loadContextMenuElements = this.loadContextMenuElements.bind(this);
-        this.addItemToFolder = this.addItemToFolder.bind(this);
-        this.mapContextMenuElements = this.mapContextMenuElements.bind(this);
     }
 
-    setActualVideo = element => {
-        this.props.setActualVideo({
-            video_element: element,
-            active: true
-        });
-    };
-
-    loadRelated = element => {
-        this.props.setRelatedFromUser(element);
-        this.setActualVideo(element);
-    };
-
-    mapContextMenuElements(folderName, index, videoElement) {
-        return (
-            <MenuItem
-                key={index}
-                onClick={() => this.addItemToFolder(folderName, videoElement)}
-            >
-                <div>
-                    {folderName
-                        .split("/")
-                        .join("➞")
-                        .slice(0, folderName.length - 1)}
-                </div>
-            </MenuItem>
-        );
-    }
-
-    addItemToFolder(folderName, videoElement) {
+    addItemToFolder = (folderName, videoElement) => {
         this._FoldersService
             .addItemToFolder(
                 this.props.user_settings.settings,
@@ -72,7 +41,7 @@ class VideoElementComponent extends Component {
             );
     }
 
-    loadContextMenuElements() {
+    loadContextMenuElements = () => {
         this._FoldersService
             .getAllFoldersList(this.props.google_file_id)
             .then(response => {
@@ -84,7 +53,35 @@ class VideoElementComponent extends Component {
             });
     }
 
-    render() {
+    loadRelated = element => {
+        this.props.setRelatedFromUser(element);
+        this.setActualVideo(element);
+    };
+
+    mapContextMenuElements = (folderName, index, videoElement) => {
+        return (
+            <MenuItem
+                key={index}
+                onClick={() => this.addItemToFolder(folderName, videoElement)}
+            >
+                <div>
+                    {folderName
+                        .split("/")
+                        .join("➞")
+                        .slice(0, folderName.length - 1)}
+                </div>
+            </MenuItem>
+        );
+    }
+
+    setActualVideo = element => {
+        this.props.setActualVideo({
+            video_element: element,
+            active: true
+        });
+    };
+
+    render = () => {
         return (
             <div className="video-card-wrapper" title={this.props.element.title}>
                 <ContextMenuTrigger

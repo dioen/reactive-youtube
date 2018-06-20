@@ -16,14 +16,12 @@ class ActualVideo extends Component {
       medium: false,
       repeatActualVideo: false
     };
+    
     this.player;
     this.Service = new VideoListService();
-    this.togglePlayerSize = this.togglePlayerSize.bind(this);
-    this.toggleRepeatActualVdieo = this.toggleRepeatActualVdieo.bind(this);
-    this.toggleActiveClass = this.toggleActiveClass.bind(this);
   }
 
-  chooseVideo(relatedVideosArray) {
+  chooseVideo = (relatedVideosArray) => {
     for (let i = 0; i < relatedVideosArray.length; i++) {
       if (
         this.props.related.alreadyPlayed.indexOf(relatedVideosArray[i].id) < 0
@@ -35,7 +33,7 @@ class ActualVideo extends Component {
     return this.relatedVideo;
   }
 
-  loadNextVideo() {
+  loadNextVideo = () => {
     if (this.state.repeatActualVideo) {
       this.player.loadVideoById(this.props.actualVideo.video_element.id);
     } else if (this.props.actualVideo.video_element.isFromUser) {
@@ -77,24 +75,7 @@ class ActualVideo extends Component {
     }
   }
 
-  componentDidMount() {
-    this.player = YouTubePlayer("player");
-    this.player.on("stateChange", event => {
-      if (event.data === 0) {
-        this.loadNextVideo();
-      }
-    });
-  }
-
-  componentDidUpdate() {
-    this.player.loadVideoById(this.props.actualVideo.video_element.id);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !(nextProps.actualVideo == this.props.actualVideo);
-  }
-
-  togglePlayerSize() {
+  togglePlayerSize = () => {
     const playerWrapper = document.getElementById("player-wrapper");
 
     if (playerWrapper.classList.contains("float-actual-video")) {
@@ -106,18 +87,35 @@ class ActualVideo extends Component {
     }
   }
 
-  toggleRepeatActualVdieo() {
+  toggleRepeatActualVdieo = () => {
     this.setState({
       ...this.state,
       repeatActualVideo: !this.state.repeatActualVideo
     });
   }
 
-  toggleActiveClass(event) {
+  toggleActiveClass = (event) => {
     event.target.classList.toggle('active');
   }
 
-  render() {
+  componentDidMount = () => {
+    this.player = YouTubePlayer("player");
+    this.player.on("stateChange", event => {
+      if (event.data === 0) {
+        this.loadNextVideo();
+      }
+    });
+  }
+
+  componentDidUpdate = () => {
+    this.player.loadVideoById(this.props.actualVideo.video_element.id);
+  }
+
+  shouldComponentUpdate = (nextProps, nextState) => {
+    return !(nextProps.actualVideo == this.props.actualVideo);
+  }
+
+  render = () => {
     return (
       <div
         id="player-wrapper"

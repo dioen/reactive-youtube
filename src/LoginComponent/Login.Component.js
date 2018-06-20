@@ -11,10 +11,9 @@ class LoginComponent extends Component {
         this.GoogleFileService = new GoogleFileService();
     }
 
-    onSuccess() {
+    onSuccess = () => {
         gapi.load('auth2', () => {
             const auth2 = gapi.auth2.getAuthInstance();
-            const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
             const profile = auth2.currentUser.get().getBasicProfile();
 
             this.GoogleFileService.ifFileExist()
@@ -33,14 +32,14 @@ class LoginComponent extends Component {
         });
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         gapi.signin2.render('customBtn', {
             'scope': 'profile https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/youtube.readonly',
             'onsuccess': () => {this.onSuccess()}
         });
     }
 
-    render() {
+    render = () => {
         return (
             <div id="customBtn" className="" data-onsuccess="onSignIn"></div>
         )

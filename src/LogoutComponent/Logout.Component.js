@@ -7,11 +7,11 @@ import GoogleFileService from '../Services/GoogleFileService';
 class LogoutComponent extends Component {
     constructor(props) {
         super(props)
+
         this.GoogleFileService = new GoogleFileService();
-        this.logout = this.logout.bind(this);
     }
 
-    logout() {
+    logout = () => {
         const auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(() => {
             console.log('User signed out.');
@@ -19,7 +19,7 @@ class LogoutComponent extends Component {
         });
     }
 
-    render() {
+    render = () => {
         return (
             <div className="user-profile-management">
                 <div className="user-profile-management-name">
