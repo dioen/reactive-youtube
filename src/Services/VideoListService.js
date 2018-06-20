@@ -1,5 +1,5 @@
 import videoObject from '../Models/Video.Object';
-let YouTube = require('youtube-node');
+const YouTube = require('youtube-node');
 
 class VideoListService {
     constructor() {
@@ -10,7 +10,7 @@ class VideoListService {
             }
         }
 
-        this.youtube = new YouTube();        
+        this.youtube = new YouTube();
     }
 
     fetchList(query) {
@@ -34,7 +34,7 @@ class VideoListService {
             this.youtube.setKey('AIzaSyCG4TkK-ABOZU0KisXMiFWhDm7e4S9v3QM');
             this.youtube.addParam('type', 'video');
             this.youtube.addParam('part', 'snippet,id');
-    
+
             this.youtube.related(videoId, 10, (error, result) => {
                 if (error) {
                     console.log(error);

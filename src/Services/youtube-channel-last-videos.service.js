@@ -7,7 +7,7 @@ export class YoutubeChannelLastVideosService {
 
     getLastChannelVideos(channelId) {
         const { apiKey } = this.settings();
-        
+
         return fetch('https://www.googleapis.com/youtube/v3/search?key=' + apiKey + '&channelId=' + channelId + '&part=snippet&order=date&maxResults=5');
     }
 }

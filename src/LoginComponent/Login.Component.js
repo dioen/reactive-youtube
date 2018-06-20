@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import { login, logout } from './Login.Actions.js'
 
 import GoogleFileService from '../Services/GoogleFileService';
-
-// TESTING TESTING
 import { initTestData } from '../folders_prot';
-// TESTING  TESTING
 
 class LoginComponent extends Component {
     constructor(props) {

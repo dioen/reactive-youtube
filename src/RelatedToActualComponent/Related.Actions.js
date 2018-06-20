@@ -1,4 +1,5 @@
 import VideoListService from '../Services/VideoListService';
+
 const _VideoListService = new VideoListService();
 
 export const addRelated = (addRelatedObject) => ({
@@ -17,7 +18,6 @@ export const setRelatedFromUser = (element) => {
             });
     }
 }
-
 
 export const addRelatedVideo = (relatedVideo) => ({
     "type": "ADD_RELATED_VIDEO",

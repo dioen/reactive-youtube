@@ -1,4 +1,4 @@
-const UserSettingsReducer = (state = { "settings": { "items": [], "lists": { "folders": [], "items": [] }, absolute_path: "" }, "user_actual_folder": [ {"folders": [], "items": [], "absolute_path": ""} ], show_user_lists: false }, actions) => {
+const UserSettingsReducer = (state = { "settings": { "items": [], "lists": { "folders": [], "items": [] }, absolute_path: "" }, "user_actual_folder": [{ "folders": [], "items": [], "absolute_path": "" }], show_user_lists: false }, actions) => {
     switch (actions.type) {
         case "SET_USER_SETTINGS":
             return {

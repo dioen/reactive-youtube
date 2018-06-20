@@ -23,4 +23,4 @@ export const loadVideosListUser = (userVideosList) => ({
         list: userVideosList,
         list_name: 'Aktualnie odtwarzana lista'
     }
-})
+});

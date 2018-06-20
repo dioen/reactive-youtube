@@ -31,16 +31,11 @@ class ShowUserSettingsComponent extends Component {
         this.loadRelatedVideo = this.loadRelatedVideo.bind(this);
     }
 
-
-    // PROBOBPLY WILL NEED TO BE MERGED INTO ONE METHOD BECAUSE NOW WE DO NOT HAVE INDEXED PROPERLY
     mapFolders(element, index) {
         return <li id="user-list-folder" className="user-settings-list-element" key={index}
             onClick={() => this.loadFolder(element)}
             onContextMenu={(event) => this.handleRightClickOnElement(element, "user-list-folder", event)}>
             <div className="icon-folder-youtube"></div>
-            {/* <div className="user-settings-folder-img-wrapper">
-                <img className="user-settings-folder-img" src={element.img}></img>
-            </div> */}
             <div className="user-settings-folder-title">{element}
             </div>
         </li>;
@@ -86,9 +81,6 @@ class ShowUserSettingsComponent extends Component {
     }
 
     handleRightClickOnElement(element, elementType, event) {
-        // Needs to be handled properly if event target IS folder element. If not, pass without interaction.
-        // Probobly the best solution for this will be setting state which element was clicked and then there 
-        // will be possibility to show/hide context menu element.
         this.setState({
             rightClickedElementCached: {
                 id: element.id,
@@ -102,7 +94,7 @@ class ShowUserSettingsComponent extends Component {
         const folderNamePrompt = prompt("Wprowadź nazwę folderu");
 
         (folderNamePrompt.length > 0) ?
-            this._FolderService.createFolder(this.props.user_settings.settings, 
+            this._FolderService.createFolder(this.props.user_settings.settings,
                 this.props.user_settings.user_actual_folder[0].absolute_path, folderNamePrompt, this.props.google_file_id)
                 .then(() => this._FolderService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
                     .then(response => this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path)))
@@ -111,14 +103,14 @@ class ShowUserSettingsComponent extends Component {
     }
 
     removeFolder = (event) => {
-        this._FolderService.removeFolder(this.props.user_settings.settings, 
+        this._FolderService.removeFolder(this.props.user_settings.settings,
             this.props.user_settings.user_actual_folder[0].absolute_path, this.state.rightClickedElementCached.value, this.props.google_file_id)
             .then(response => this._FolderService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
                 .then(response => this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path)));
     }
 
     removeItem = () => {
-        this._FolderService.removeItemFromFolder(this.props.user_settings.settings, 
+        this._FolderService.removeItemFromFolder(this.props.user_settings.settings,
             this.state.rightClickedElementCached.id, this.props.user_settings.user_actual_folder[0].absolute_path, this.props.google_file_id)
             .then(response => this._FolderService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
                 .then(response => this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path)));
@@ -159,8 +151,6 @@ class ShowUserSettingsComponent extends Component {
             </div>) : (<div></div>)
         )
     }
-
-
 }
 
 const mapStateToProps = state => ({ user_settings: state.user_settings, google_file_id: state.user_login.google.google_file_id });
@@ -170,6 +160,5 @@ const mapDispatchToProps = dispatch => ({
     loadVideosListUser: videosList => { dispatch(loadVideosListUser(videosList)) },
     setRelatedFromUser: videoObject => { dispatch(setRelatedFromUser(videoObject)) }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowUserSettingsComponent);
