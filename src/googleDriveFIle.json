@@ -1,0 +1,18 @@
+{
+    "settings": {
+        "items": [],
+        "lists": {
+            "testFolderName": {
+                "folders": [],
+                "items": [],
+                "absolute_path": "test/testFolderName/"
+            }
+        }
+    },
+    "result": {
+        "settings": {
+            "items": [],
+            "lists": {}
+        }
+    }
+}
