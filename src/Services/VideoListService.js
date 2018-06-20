@@ -1,7 +1,7 @@
 import videoObject from '../Models/Video.Object';
 const YouTube = require('youtube-node');
 
-class VideoListService {
+export class VideoListService {
     constructor() {
         this.youtube = new YouTube();
     }
@@ -47,5 +47,3 @@ class VideoListService {
         }
     }
 }
-
-export default VideoListService;

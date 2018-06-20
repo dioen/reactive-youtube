@@ -1,4 +1,4 @@
-import VideoListService from '../Services/VideoListService';
+import { VideoListService } from '../Services/VideoListService';
 
 const _VideoListService = new VideoListService();
 
