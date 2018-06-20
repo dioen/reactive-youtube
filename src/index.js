@@ -35,8 +35,10 @@ class MainComponent extends Component {
             <div className="main-window">
                 <SearchComponent />
                 <div className="main-window-wrapper">
-                    <ActualVideo />
-                    <VideoList />
+                    <div>
+                        <ActualVideo />
+                        <VideoList />
+                    </div>
                     <div id="side-nav-id" className="side-nav">
                         <RelatedComponent />
                         <ShowUserListComponent />

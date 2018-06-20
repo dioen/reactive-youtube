@@ -79,8 +79,8 @@ class NewsFromSubscriptionsComponent extends Component {
 
     render = () => {
         return (
-            <div id="new-subscriptions-notify-bell" className="subscriptions-news-bell-icon-wrapper">
-                <div className="icon-bell-alt" onClick={this.handleSubscribeButtonClick}></div>
+            <div id="new-subscriptions-notify-bell" className="subscriptions-news-bell-icon-wrapper" onClick={this.handleSubscribeButtonClick}>
+                <div className="icon-bell-alt"></div>
                 <div id="subscriptions-list" className="user-subscriptionsto-list-wrapper">
                     <div className="user-subscriptionsto-list">
                         {this.state.items.map((item, index) => (

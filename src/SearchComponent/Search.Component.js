@@ -16,17 +16,17 @@ class SearchComponent extends Component {
 
     render = () => {
         return (
-            <div className="form-wrapper">
-                <div className="col-md-3 nav-logo-wrapper">
+            <div className="nav-wrapper">
+                <div className="nav-logo-wrapper">
                     <img className="nav-logo-img" src="/reactive-youtube/assets/images/logo.png" />
                 </div>
-                <form className="search-form col-md-6">
+                <form className="search-form">
                     <input id="search-input" type="text" placeholder="Szukaj..." ref="searchValue" autoFocus />
                     <button className="search-button icon-search" onClick={(e) => { e.preventDefault(), this.loadList() }}></button>
-                    <div id="mobile-menu" className="icon-menu mobile-menu-icon"></div>
+                    {/* <div id="mobile-menu" className="icon-menu mobile-menu-icon"></div> */}
 
                 </form>
-                <div className="col-md-3">
+                <div className="user-profile-panel-wrapper">
                     {
                         (this.props.google.logged_in) ?
                             (<LogoutComponent />)

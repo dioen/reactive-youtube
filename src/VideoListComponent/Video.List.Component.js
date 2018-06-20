@@ -52,7 +52,7 @@ class VideoList extends Component {
 
   render = () => {
     return (
-      <div>
+      <div className="video-list-view-wrapper">
         {
           (this.props.videos.list_name === 'Wyniki wyszukiwania') ? (
             <div className="video-list-view">
