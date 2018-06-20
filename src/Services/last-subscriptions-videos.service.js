@@ -7,7 +7,19 @@ export class LastSubscriptionsVideosService {
         this._YoutubeChannelLastVideosService = new YoutubeChannelLastVideosService();
     }
 
-    queryChannelsForLastVideos() {
+    getChannelVideos = (channelId) => {
+        return this._YoutubeChannelLastVideosService.getLastChannelVideos(channelId);
+    }
+
+    getUserSubscriptions = () => {
+        return this._YoutubeUserSubscriptionsService.getUserSubscriptionsTo();
+    }
+
+    promiseAllRequests = (requestsArray) => {
+        return Promise.all(requestsArray);
+    }
+
+    queryChannelsForLastVideos = () => {
         return this.getUserSubscriptions()
             .then(subscriptions => {
                 return this.promiseAllRequests(
@@ -17,17 +29,5 @@ export class LastSubscriptionsVideosService {
                     )
                 );
             });
-    }
-
-    getUserSubscriptions = () => {
-        return this._YoutubeUserSubscriptionsService.getUserSubscriptionsTo();
-    }
-
-    getChannelVideos = (channelId) => {
-        return this._YoutubeChannelLastVideosService.getLastChannelVideos(channelId);
-    }
-
-    promiseAllRequests = (requestsArray) => {
-        return Promise.all(requestsArray);
     }
 }

@@ -3,17 +3,10 @@ const YouTube = require('youtube-node');
 
 class VideoListService {
     constructor() {
-
-        this.filter = (element) => {
-            if (element.id.videoId != undefined) {
-                return element;
-            }
-        }
-
         this.youtube = new YouTube();
     }
 
-    fetchList(query) {
+    fetchList = (query) => {
         return new Promise((resolve, reject) => {
             this.youtube.setKey('AIzaSyCG4TkK-ABOZU0KisXMiFWhDm7e4S9v3QM');
             this.youtube.search(query, 50, (error, result) => {
@@ -29,7 +22,7 @@ class VideoListService {
         });
     }
 
-    fetchRelatedVideo(videoId) {
+    fetchRelatedVideo = (videoId) => {
         return new Promise((resolve, reject) => {
             this.youtube.setKey('AIzaSyCG4TkK-ABOZU0KisXMiFWhDm7e4S9v3QM');
             this.youtube.addParam('type', 'video');
@@ -46,6 +39,12 @@ class VideoListService {
                 }
             });
         });
+    }
+
+    filter = (element) => {
+        if (element.id.videoId != undefined) {
+            return element;
+        }
     }
 }
 

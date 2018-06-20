@@ -1,13 +1,14 @@
 export class YoutubeUserSubscriptionsService {
-    constructor() { }
+    constructor() {
+        this.apiKey = 'AIzaSyCG4TkK-ABOZU0KisXMiFWhDm7e4S9v3QM'
+    }
 
-    settings = () => ({
-        apiKey: 'AIzaSyCG4TkK-ABOZU0KisXMiFWhDm7e4S9v3QM'
-    });
+    calcNeededCalls = (subscriptionsCount) => {
+        return Math.ceil(subscriptionsCount / 50);
+    }
 
     getUserSubscriptionsTo = () => {
-        const { apiKey } = this.settings();
-        const googleSubscriptionsApi = this.subscriptionsCallsFactory({ apiKey });
+        const googleSubscriptionsApi = this.subscriptionsCallsFactory();
         const result = googleSubscriptionsApi();
 
         return result.then(response => {
@@ -20,15 +21,14 @@ export class YoutubeUserSubscriptionsService {
                 const neededCallsCount = this.calcNeededCalls(response.totalResults);
 
                 for (let i = 0; i <= neededCallsCount; i++) {
-                    subscriptions = [...subscriptions, this.subscriptionsCallsFactory({ googleQueryUrl, apiKey })];
+                    subscriptions = [...subscriptions, this.subscriptionsCallsFactory()];
                 }
             }
             return Promise.resolve(subscriptions);
         });
     }
 
-    subscriptionsCallsFactory = ({ apiKey }) => {
-        let pageToken = '';
+    subscriptionsCallsFactory = () => {
         return () => {
             const request = gapi.client.request({
                 'path': '/youtube/v3/subscriptions/',
@@ -37,17 +37,12 @@ export class YoutubeUserSubscriptionsService {
                     'part': 'snippet,contentDetails',
                     'mine': 'true',
                     'maxResults': '50',
-                    'key': apiKey
+                    'key': this.apiKey
                 }
             });
             return request.then(response => {
-                pageToken = response.result.nextPageToken;
                 return Promise.resolve(response.result);
             });
         }
-    }
-
-    calcNeededCalls = (subscriptionsCount) => {
-        return Math.ceil(subscriptionsCount / 50);
     }
 }

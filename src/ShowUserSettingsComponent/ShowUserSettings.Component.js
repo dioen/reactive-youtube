@@ -11,6 +11,7 @@ import { loadVideosListUser } from '../VideoListComponent/Video.List.Actions';
 class ShowUserSettingsComponent extends Component {
     constructor(props) {
         super(props)
+
         this.state = {
             folderNameVisible: false,
             rightClickedElementCached: {
@@ -20,18 +21,51 @@ class ShowUserSettingsComponent extends Component {
         }
 
         this._FolderService = new FoldersService();
-
-        this.loadFolder = this.loadFolder.bind(this);
-        this.createFolder = this.createFolder.bind(this);
-        this.moveFolderUp = this.moveFolderUp.bind(this);
-        this.loadActualVideo = this.loadActualVideo.bind(this);
-        this.removeFolder = this.removeFolder.bind(this);
-        this.handleRightClickOnElement = this.handleRightClickOnElement.bind(this);
-        this.loadUserList = this.loadUserList.bind(this);
-        this.loadRelatedVideo = this.loadRelatedVideo.bind(this);
     }
 
-    mapFolders(element, index) {
+    createFolder = () => {
+        const folderNamePrompt = prompt("Wprowadź nazwę folderu");
+
+        (folderNamePrompt.length > 0) ?
+            this._FolderService.createFolder(this.props.user_settings.settings,
+                this.props.user_settings.user_actual_folder[0].absolute_path, folderNamePrompt, this.props.google_file_id)
+                .then(() => this._FolderService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
+                    .then(response => this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path)))
+            :
+            null
+    }
+
+    handleRightClickOnElement = (element, elementType, event) => {
+        this.setState({
+            rightClickedElementCached: {
+                id: element.id,
+                value: event.target.innerHTML,
+                element_type: elementType
+            }
+        });
+    }
+
+    loadFolder = (chosenFolderName) => {
+        this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path + chosenFolderName + "/");
+    }
+
+    moveFolderUp = () => {
+        this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].parent_path);
+    }
+
+    loadActualVideo = (videoObject) => {
+        this.props.setActualVideo(videoObject)
+    }
+
+    loadRelatedVideo = (videoObject) => {
+        this.props.setRelatedFromUser(videoObject);
+    }
+
+    loadUserList = () => {
+        this.props.loadVideosListUser(this.props.user_settings.user_actual_folder[0].items);
+    }
+
+    mapFolders = (element, index) => {
         return <li id="user-list-folder" className="user-settings-list-element" key={index}
             onClick={() => this.loadFolder(element)}
             onContextMenu={(event) => this.handleRightClickOnElement(element, "user-list-folder", event)}>
@@ -41,7 +75,7 @@ class ShowUserSettingsComponent extends Component {
         </li>;
     }
 
-    mapVideos(element, index) {
+    mapVideos = (element, index) => {
         element.isFromUser = true;
         return <li id="user-list-item" className="user-settings-list-element" key={index}
             onContextMenu={(event) => this.handleRightClickOnElement(element, "user-list-item", event)}
@@ -60,48 +94,6 @@ class ShowUserSettingsComponent extends Component {
         </li>;
     }
 
-    loadFolder(chosenFolderName) {
-        this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path + chosenFolderName + "/");
-    }
-
-    moveFolderUp() {
-        this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].parent_path);
-    }
-
-    loadActualVideo(videoObject) {
-        this.props.setActualVideo(videoObject)
-    }
-
-    loadRelatedVideo(videoObject) {
-        this.props.setRelatedFromUser(videoObject);
-    }
-
-    loadUserList() {
-        this.props.loadVideosListUser(this.props.user_settings.user_actual_folder[0].items);
-    }
-
-    handleRightClickOnElement(element, elementType, event) {
-        this.setState({
-            rightClickedElementCached: {
-                id: element.id,
-                value: event.target.innerHTML,
-                element_type: elementType
-            }
-        });
-    }
-
-    createFolder = () => {
-        const folderNamePrompt = prompt("Wprowadź nazwę folderu");
-
-        (folderNamePrompt.length > 0) ?
-            this._FolderService.createFolder(this.props.user_settings.settings,
-                this.props.user_settings.user_actual_folder[0].absolute_path, folderNamePrompt, this.props.google_file_id)
-                .then(() => this._FolderService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
-                    .then(response => this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path)))
-            :
-            null
-    }
-
     removeFolder = (event) => {
         this._FolderService.removeFolder(this.props.user_settings.settings,
             this.props.user_settings.user_actual_folder[0].absolute_path, this.state.rightClickedElementCached.value, this.props.google_file_id)
@@ -116,7 +108,7 @@ class ShowUserSettingsComponent extends Component {
                 .then(response => this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path)));
     }
 
-    render() {
+    render = () => {
         return (
             (this.props.user_settings.show_user_lists) ? (<div id="user-settings-wrapper" className="user-settings-wrapper">
                 <ContextMenu id="user-settings-context-menu">

@@ -40,17 +40,17 @@ class VideoList extends Component {
     }, () => this.props.loadVideosListUser(this.state.items));
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.loadVideosListSearched("");
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = (nextProps) => {
     this.setState({
       items: nextProps.videos.searched
     });
   }
 
-  render() {
+  render = () => {
     return (
       <div>
         {
@@ -75,6 +75,7 @@ class VideoList extends Component {
 const mapStateToProps = state => ({
   videos: state.videos
 });
+
 const mapDispatchToProps = dispatch => ({
   loadVideosListSearched: query => {
     dispatch(loadVideosListSearched(query));
