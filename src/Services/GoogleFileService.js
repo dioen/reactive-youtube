@@ -1,7 +1,5 @@
 export default class GoogleFileService {
-    constructor() {
-
-    }
+    constructor() { }
 
     createFileWithJSONContent(data) {
         const boundary = '-------314159265358979323846';

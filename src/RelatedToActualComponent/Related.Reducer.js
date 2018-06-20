@@ -6,7 +6,6 @@ const RelatedReducer = (state = { 'relatedVideo': { 'id': '', 'src': '', 'title'
                 'relatedVideo': actions.payload
             }
 
-
         case "ADD_RELATED_VIDEO":
             return {                
                 'alreadyPlayed':  [...state.alreadyPlayed, actions.payload.id],

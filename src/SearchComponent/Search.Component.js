@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import VideoListService from '../Services/VideoListService';
 import { loadVideosListSearched } from '../VideoListComponent/Video.List.Actions';
 import LoginComponent from '../LoginComponent/Login.Component';
 import LogoutComponent from '../LogoutComponent/Logout.Component';
 import NewsFromSubscriptionsComponent from '../NewsFromSubscriptionsComponent/news-from-subscriptions.component';
-
-const _VideoListService = new VideoListService();
 
 class SearchComponent extends Component {
     constructor(props) {

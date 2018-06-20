@@ -94,8 +94,6 @@ class AddToListComponent extends Component {
     }
 }
 
-// export default AddToListComponent;
-
 const mapStateToProps = state => ({ google_file_id: state.user_login.google_file_id });
 
 const mapDispatchToProps = dispatch => ({
@@ -103,4 +101,4 @@ const mapDispatchToProps = dispatch => ({
     setUserActualFolder: actualFolder => { dispatch(setUserActualFolder(actualFolder)) }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddToListComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(AddToListComponent);

@@ -5,8 +5,6 @@ import VideoListService from '../Services/VideoListService';
 import { addRelatedVideo } from './Related.Actions';
 import { setActualVideo } from '../ActualVideoComponent/Actual.Video.Actions';
 
-const _VideoListService = new VideoListService();
-
 class RelatedComponent extends Component {
     constructor(props) {
         super(props)
@@ -51,8 +49,6 @@ class RelatedComponent extends Component {
         )
     }
 }
-
-
 
 const mapStateToProps = (state) => (state);
 const mapDispatchToProps = (dispatch) => ({

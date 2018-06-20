@@ -1,5 +1,3 @@
-import videoObject from '../Models/Video.Object';
-
 const videoListReducer = (state = { searched: [], user: [], list_name: '' }, actions) => {
     switch (actions.type) {
         case "LOAD_VIDEO_LIST_USER":

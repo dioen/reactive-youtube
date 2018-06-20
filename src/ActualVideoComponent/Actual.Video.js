@@ -20,7 +20,7 @@ class ActualVideo extends Component {
     this.Service = new VideoListService();
     this.togglePlayerSize = this.togglePlayerSize.bind(this);
     this.toggleRepeatActualVdieo = this.toggleRepeatActualVdieo.bind(this);
-    this.toggleActiveClass =  this.toggleActiveClass.bind(this);
+    this.toggleActiveClass = this.toggleActiveClass.bind(this);
   }
 
   chooseVideo(relatedVideosArray) {
@@ -114,7 +114,7 @@ class ActualVideo extends Component {
   }
 
   toggleActiveClass(event) {
-      event.target.classList.toggle('active');
+    event.target.classList.toggle('active');
   }
 
   render() {
@@ -130,12 +130,12 @@ class ActualVideo extends Component {
         <div
           className="icon-resize-full resize-icon active"
           id="repeat-icon"
-          onClick={(event) => {this.togglePlayerSize(); this.toggleActiveClass(event)}}
+          onClick={(event) => { this.togglePlayerSize(); this.toggleActiveClass(event) }}
         />
         <div
           className="icon-cw replay-icon"
           id=""
-          onClick={(event) => {this.toggleRepeatActualVdieo(); this.toggleActiveClass(event)}}
+          onClick={(event) => { this.toggleRepeatActualVdieo(); this.toggleActiveClass(event) }}
         />
         <div id="player" frameBorder="0" type="text/html" allowFullScreen />
         <div className="actual-video-title">

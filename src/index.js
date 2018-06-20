@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import initialState from './Store/Store';
 import { Provider } from 'react-redux';
 import videoListReducer from './VideoListComponent/Video.List.Reducers';
 import actualVideoReducer from './ActualVideoComponent/Actual.Video.Reducer';
