@@ -16,6 +16,7 @@ import RelatedComponent from './RelatedToActualComponent/Related.Component';
 
 import ShowUserListComponent from './ShowUserListComponent/ShowUserList.Component';
 import { applyMiddleware } from 'redux';
+import Hammer from 'hammerjs';
 
 class MainComponent extends Component {
     constructor(props) {
@@ -28,6 +29,41 @@ class MainComponent extends Component {
         //     this.setState(store.getState());
         //     console.log('set state');
         // });
+    }
+
+    onLeftSwipe = () => {
+        // alert('udalo sie! LEFT');
+
+        const sideNavTag = document.getElementById('side-nav-id');
+        sideNavTag.classList.add('active');
+    }
+
+    onRightSwipe = () => {
+        // alert('udalo sie! RIGHT');
+
+        const sideNavTag = document.getElementById('side-nav-id');
+        sideNavTag.classList.remove('active');
+    }
+
+    componentDidMount = () => {
+        const bodyTag = document.getElementById('App');
+        // const swipeLeftOptions = {
+        //     event: 'swipeleft',
+        //     treshold: '15',
+        //     velocity: '0.3'
+        // }
+        const swipe = new Hammer.Manager(bodyTag, {
+            touchAction: 'auto',
+            inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput,
+            recognizers: [
+                [Hammer.Swipe, {
+                    direction: Hammer.DIRECTION_HORIZONTAL
+                }]
+            ]
+        });
+
+        swipe.on('swipeleft', this.onLeftSwipe);
+        swipe.on('swiperight', this.onRightSwipe);
     }
 
     render = () => {

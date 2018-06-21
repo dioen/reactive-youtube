@@ -5,6 +5,9 @@
   color: #e8e8e8;
   font-family: 'Lato', sans-serif;
   font-size: 16px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 html {
@@ -22,11 +25,13 @@ html {
 } */
 
 .main-window {
-  position: relative;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .main-window-wrapper {
@@ -259,6 +264,10 @@ button {
   background-color: #333333;
 
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.4);
+}
+
+.side-nav.active {
+  display: flex;
 }
 
 .right-side-wrapper {
