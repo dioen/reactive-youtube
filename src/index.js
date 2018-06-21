@@ -35,14 +35,16 @@ class MainComponent extends Component {
             <div className="main-window">
                 <SearchComponent />
                 <div className="main-window-wrapper">
-                    <div>
+                    <div className="right-side-wrapper">
                         <ActualVideo />
                         <VideoList />
                     </div>
                     <div id="side-nav-id" className="side-nav">
                         <RelatedComponent />
-                        <ShowUserListComponent />
-                        <ShowUserSettingsComponent />
+                        <div className="user-settings-panel-wrapper">
+                            <ShowUserListComponent />
+                            <ShowUserSettingsComponent />
+                        </div>
                     </div>
                 </div>
             </div>

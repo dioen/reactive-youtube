@@ -37,9 +37,9 @@ class RelatedComponent extends Component {
     render = () => {
         return (
             (this.props.related.relatedVideo.id !== '') ?
-                <div className="next-video-wrapper col-md-12">
-                    <div className="next-video-statement col-md-12">Następnie:</div>
-                    <div className="next-video-card col-md-12 margin-top-20" onClick={() => { this.setActualVideo(this.props.related.relatedVideo) }}>
+                <div className="next-video-wrapper">
+                    <div className="next-video-statement">Następnie:</div>
+                    <div className="next-video-card margin-top-20" onClick={() => { this.setActualVideo(this.props.related.relatedVideo) }}>
                         <img className="next-video-image" src={this.props.related.relatedVideo.img} alt="" />
                         <div className="next-video-title">{this.props.related.relatedVideo.title}</div>
                     </div>

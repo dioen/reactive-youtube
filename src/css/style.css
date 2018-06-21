@@ -7,6 +7,20 @@
   font-size: 16px;
 }
 
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  height: 0;
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+/* ::-webkit-scrollbar-thumb {
+  background: #FF0000;
+} */
+
 .main-window {
   position: relative;
   top: 0;
@@ -17,10 +31,13 @@
 
 .main-window-wrapper {
   display: flex;
+  height: calc(100% - 110px);
+  position: fixed;
 }
 
 .nav-logo-wrapper {
-  flex: 1 0 145px;
+  flex: 1;
+  order: 1;
 }
 
 .nav-logo-img {
@@ -74,7 +91,6 @@
 }
 
 .youtube-frame-wrapper {
-  position: relative;
 	padding-bottom: 56.25%; /* 16:9 */
 	padding-top: 25px;
 	height: 0;
@@ -88,14 +104,6 @@
 	height: 100%;
 }
 
-/* #player {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 580px;
-} */
-
 .nav-wrapper {
   display: flex;
   justify-content: space-between;
@@ -105,25 +113,26 @@
   top: 0;
   width: 100%;
   background: #292929;
-  z-index: 101;
+  z-index: 102;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .user-profile-panel-wrapper {
-  flex: 2 0 170px;
-  display: flex;
+  flex: 1 0 0;
+  order: 2;
   justify-content: flex-end;
-  margin-right: 10px;
+
 }
 
 .search-form {
-  flex: 5 0 439px;
+  flex: 2 0 100%;
+  order: 3;
   padding: 10px 10px;
-  display: flex;
 }
 
 .search-form > input {
-  flex: 9;
+  width: 89%;
+
   height: 32px;
   font-size: 18px;
   font-style: italic;
@@ -239,27 +248,50 @@ button {
 }
 
 .side-nav {
-  flex: 0 0 300px;
+  flex: 1 0 350px;
+  display: none;
+  flex-flow: column;
+  position: sticky;
+  overflow: hidden;
+  height: 100%;
+  right: 0;
+  z-index: 101;
   background-color: #333333;
+
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.4);
 }
 
+.right-side-wrapper {
+  flex: 1 0 360px;
+  height: 100%;
+  overflow: scroll;
+}
+
 .next-video-wrapper {
+  flex: 1;
   position: relative;
   margin: 10px 0;
   height: 120px;
+  padding-left: 22px;
+}
+
+.user-settings-panel-wrapper {
+  flex: 6;
+  display: flex;
+  flex-direction: column;
 }
 
 .next-video-image {
+  float: left;
   width: 80px;
-  display: inline-block;
+  margin-left: 15px;
 }
 
 .next-video-title {
+  float: left;
   width: 210px;
-  float: right;
   font-size: 14px;
-  padding-left: 12px;
+  margin-left: 12px;
 }
 
 .next-video-title:after {
@@ -281,6 +313,12 @@ button {
 
 .next-video-card {
   cursor: pointer;
+}
+
+.next-video-card:after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 .mobile-menu-icon {
@@ -434,7 +472,6 @@ button {
   font-size: 17px;
   padding: 10px 0;
   cursor: pointer;
-  /* font-style: italic; */
   border-radius: 10px;
   font-weight: 200;
 }
@@ -445,26 +482,23 @@ button {
 }
 
 .user-settings-list {
+  overflow: scroll;
   list-style-type: none;
   width: calc(100% + 17px);
-  min-height: 79%;
-  overflow-y: scroll;
   padding-right: 17px;
   background: #404040;
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.4);
 }
 
 .user-settings-wrapper {
+  flex: 9;
   width: 100%;
-  height: 100%;
   overflow-y: scroll;
-  overflow-x: hidden;
-  height: 79%;
   width: calc(100% + 17px);
 }
 
 .user-settings-list-element {
-  margin: 12px 0;
+  padding: 7px 0;
   cursor: pointer;
 }
 
@@ -476,6 +510,14 @@ button {
 
 .user-settings-list-element:hover {
   color: #FF0000;
+}
+
+.user-settings-folder {
+  flex: 0 0 35px;
+}
+
+.user-settings-panel-icons-wrapper {
+  display: flex;
 }
 
 .user-settings-folder-title {
@@ -525,7 +567,7 @@ button {
 }
 
 .react-contextmenu-wrapper {
-  height: 100%;
+  
 }
 
 .react-contextmenu {
@@ -655,7 +697,7 @@ button {
 .subscriptions-news-bell-icon-wrapper {
   display: inline-block;
     position: relative;
-    top: 8px;
+    top: 2px;
     color: #a1a1a1;
     font-size: 26px;
     cursor: pointer;
@@ -705,6 +747,7 @@ button {
 }
 
 .user-dashboard-tile-wrapper {
+  flex: 1;
   font-size: 25px;
   text-align: center;
   cursor: pointer;
@@ -724,32 +767,40 @@ button {
   margin-top: 20px;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (min-width: 960px) {
+
   .side-nav {
-    width: 0;
-    flex: 0 0 0;
+    display: flex;
+    position: relative;
+    flex: 0 0 350px;
   }
 
 
 
 
-
-
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
+.main-window-wrapper {
+  height: calc(100% - 55px);
+}
+
 .user-profile-panel-wrapper {
-  flex: 1 0 0;
-  order: 2;
-}
-
-.search-form {
-  flex: 8 0 100%;
+  flex: 2 0 170px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
   order: 3;
 }
 
+.search-form {
+  flex: 20;
+  display: flex;
+  order: 2;
+}
+
 .nav-logo-wrapper {
-  flex: 1 0 0;
+  flex: 1 0 145px;
   order: 1;
 }
 
@@ -758,28 +809,30 @@ button {
   width: 100%;
 }
 
+.nav-logo-img {
+  height: 44px;
+}
 
+.youtube-frame-wrapper {
+  position: relative;
+  height: 625px;
+  padding: 0;
+}
 
+.subscriptions-news-bell-icon-wrapper {
+    top: 9px;
+}
 
-
-
-  .side-nav {
-    flex: 0 0 0;
-    position: absolute;
-    width: 60%;
-    right: 0;
-  }
-  .side-nav.active {
-    width: 350px;
-    position: fixed;
-  }
   .mobile-menu-icon {
     visibility: visible;
     display: inline;
   }
-  .search-form > input {
-    width: 69%;
-  }
+
+  /* .search-form > input {
+  flex: 9;
+
+  } */
+
   .video-list-view {
     width: 100%;
   }
