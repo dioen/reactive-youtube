@@ -54,16 +54,17 @@ class VideoList extends Component {
     return (
       <div className="video-list-view-wrapper">
         {
-          (this.props.videos.list_name === 'Wyniki wyszukiwania') ? (
-            <div className="video-list-view">
-              <div className="video-list-name-title">
-                {this.props.videos.list_name}
+          (this.props.videos.list_name === 'Wyniki wyszukiwania' || window.isMobile) ?
+            (
+              <div className="video-list-view">
+                <div className="video-list-name-title">
+                  {this.props.videos.list_name}
+                </div>
+                {
+                  this.props.videos.searched.map((element, index) => (<VideoElementComponent element={element} index={index} key={index} />))
+                }
               </div>
-              {
-                this.props.videos.searched.map((element, index) => (<VideoElementComponent element={element} index={index} key={index} />))
-              }
-            </div>
-          )
+            )
             :
             <SortableVideosList items={this.state.items} onSortEnd={this.onSortEnd} axis={'xy'} localProps={this.props} />
         }
