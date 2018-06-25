@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { combineReducers } from 'redux';
 import { connect } from 'react-redux';
-import VideoListService from '../Services/VideoListService';
+import { VideoListService } from '../../services/VideoList.Service';
 import { addRelatedVideo } from './Related.Actions';
-import { setActualVideo } from '../ActualVideoComponent/Actual.Video.Actions';
+import { setActualVideo } from '../ActualVideoComponent/ActualVideo.Actions';
 
 class RelatedComponent extends Component {
     constructor(props) {

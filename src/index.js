@@ -3,18 +3,17 @@ import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import videoListReducer from './VideoListComponent/Video.List.Reducers';
-import actualVideoReducer from './ActualVideoComponent/Actual.Video.Reducer';
-import RelatedReducer from './RelatedToActualComponent/Related.Reducer';
-import LoginReducer from './LoginComponent/Login.Reducer';
-import UserSettingsReducer from './ShowUserSettingsComponent/ShowUserSettings.Reducer.js';
-import ShowUserSettingsComponent from './ShowUserSettingsComponent/ShowUserSettings.Component';
-import VideoList from './VideoListComponent/Video.List.Component';
-import ActualVideo from './ActualVideoComponent/Actual.Video';
-import SearchComponent from './SearchComponent/Search.Component';
-import RelatedComponent from './RelatedToActualComponent/Related.Component';
-
-import ShowUserListComponent from './ShowUserListComponent/ShowUserList.Component';
+import videoListReducer from './components/VideoListComponent/VideoList.Reducers';
+import actualVideoReducer from './components/ActualVideoComponent/ActualVideo.Reducer';
+import RelatedReducer from './components/RelatedToActualComponent/Related.Reducer';
+import LoginReducer from './components/LoginComponent/Login.Reducer';
+import UserSettingsReducer from './components/ShowUserSettingsComponent/ShowUserSettings.Reducer';
+import ShowUserSettingsComponent from './components/ShowUserSettingsComponent/ShowUserSettings.Component';
+import VideoList from './components/VideoListComponent/VideoList.Component';
+import ActualVideo from './components/ActualVideoComponent/ActualVideo.Component';
+import SearchComponent from './components/SearchComponent/Search.Component';
+import RelatedComponent from './components/RelatedToActualComponent/Related.Component';
+import ShowUserListComponent from './components/ShowUserListComponent/ShowUserList.Component';
 import { applyMiddleware } from 'redux';
 import Hammer from 'hammerjs';
 
@@ -39,26 +38,17 @@ class MainComponent extends Component {
     }
 
     onLeftSwipe = () => {
-        // alert('udalo sie! LEFT');
-
         const sideNavTag = document.getElementById('side-nav-id');
         sideNavTag.classList.add('active');
     }
 
     onRightSwipe = () => {
-        // alert('udalo sie! RIGHT');
-
         const sideNavTag = document.getElementById('side-nav-id');
         sideNavTag.classList.remove('active');
     }
 
     componentDidMount = () => {
         const bodyTag = document.getElementById('App');
-        // const swipeLeftOptions = {
-        //     event: 'swipeleft',
-        //     treshold: '15',
-        //     velocity: '0.3'
-        // }
         const swipe = new Hammer.Manager(bodyTag, {
             touchAction: 'auto',
             inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import GoogleFileService from '../Services/GoogleFileService';
-import { FoldersService } from '../Services/FoldersService';
+import GoogleFileService from '../../services/GoogleFileService';
+import { FoldersService } from '../../services/FoldersService';
 import { loadUserSettings, setUserActualFolder } from '../ShowUserSettingsComponent/ShowUserSettings.Actions';
 
 class AddToListComponent extends Component {

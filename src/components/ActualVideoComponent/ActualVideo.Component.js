@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import YouTubePlayer from "youtube-player";
-import VideoListService from "../Services/VideoListService";
-import {
-  addRelated,
-  addRelatedVideo
-} from "../RelatedToActualComponent/Related.Actions";
-import { setActualVideo } from "./Actual.Video.Actions";
+import { VideoListService } from "../../services/VideoList.Service";
+import { addRelatedVideo } from "../RelatedToActualComponent/Related.Actions";
+import { setActualVideo } from "./ActualVideo.Actions";
 
 class ActualVideo extends Component {
   constructor(props) {
@@ -50,7 +47,7 @@ class ActualVideo extends Component {
         videoIndex = videoIndex + 1;
       }
 
-      this.player.loadVideoById(this.props.videos.user[videoIndex].id); //THIS HAS TO BE DONE INSIDE ACTUALVID COMPONENT, NOT HERE!!!!!!!!!
+      this.player.loadVideoById(this.props.videos.user[videoIndex].id);
       this.props.setActualVideo({
         video_element: this.props.videos.user[videoIndex],
         active: true
@@ -153,9 +150,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addRelated: relatedVideoArray => {
-    dispatch(addRelated(relatedVideoArray));
-  },
   addRelatedVideo: relatedVideo => {
     dispatch(addRelatedVideo(relatedVideo));
   },

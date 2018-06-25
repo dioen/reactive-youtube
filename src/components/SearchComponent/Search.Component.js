@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadVideosListSearched } from '../VideoListComponent/Video.List.Actions';
+import { loadVideosListSearched } from '../VideoListComponent/VideoList.Actions';
 import LoginComponent from '../LoginComponent/Login.Component';
 import LogoutComponent from '../LogoutComponent/Logout.Component';
-import NewsFromSubscriptionsComponent from '../NewsFromSubscriptionsComponent/news-from-subscriptions.component';
+import NewsFromSubscriptionsComponent from '../NewsFromSubscriptionsComponent/NewsFromSubscriptions.Component';
 
 class SearchComponent extends Component {
     constructor(props) {

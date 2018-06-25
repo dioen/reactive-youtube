@@ -1,5 +1,5 @@
-import { YoutubeUserSubscriptionsService } from './youtube-user-subscriptions.service';
-import { YoutubeChannelLastVideosService } from './youtube-channel-last-videos.service';
+import { YoutubeUserSubscriptionsService } from './YoutubeUserSubscriptions.Service';
+import { YoutubeChannelLastVideosService } from './YoutubeChannelLastVideos.Service';
 
 export class LastSubscriptionsVideosService {
     constructor() {
