@@ -1,4 +1,4 @@
-import videoObject from '../Models/Video.Object';
+import videoObject from '../models/Video.Object';
 const YouTube = require('youtube-node');
 
 export class VideoListService {

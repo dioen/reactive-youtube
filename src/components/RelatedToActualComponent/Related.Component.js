@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { VideoListService } from '../Services/VideoList.Service';
+import { VideoListService } from '../../services/VideoList.Service';
 import { addRelatedVideo } from './Related.Actions';
 import { setActualVideo } from '../ActualVideoComponent/ActualVideo.Actions';
 

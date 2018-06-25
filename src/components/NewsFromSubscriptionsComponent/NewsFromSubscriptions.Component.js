@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { LastSubscriptionsVideosService } from '../Services/LastSubscriptionsVideos.Service';
-import { LocalStorageService } from '../Services/LocalStorage.Service';
+import { LastSubscriptionsVideosService } from '../../services/LastSubscriptionsVideos.Service';
+import { LocalStorageService } from '../../services/LocalStorage.Service';
 import { setActualVideo } from "../ActualVideoComponent/ActualVideo.Actions";
 
 class NewsFromSubscriptionsComponent extends Component {

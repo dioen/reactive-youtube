@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../LoginComponent/Login.Actions.js'
 
-import GoogleFileService from '../Services/GoogleFile.Service';
+import GoogleFileService from '../../services/GoogleFile.Service';
 
 class LogoutComponent extends Component {
     constructor(props) {

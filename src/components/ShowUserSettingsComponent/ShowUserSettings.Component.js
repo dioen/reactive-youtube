@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import { setUserActualFolder } from './ShowUserSettings.Actions';
-import { FoldersService } from '../Services/Folders.Service';
+import { FoldersService } from '../../services/Folders.Service';
 import { setActualVideo } from '../ActualVideoComponent/ActualVideo.Actions';
 import { setRelatedFromUser } from '../RelatedToActualComponent/Related.Actions';
 import { loadVideosListUser } from '../VideoListComponent/VideoList.Actions';

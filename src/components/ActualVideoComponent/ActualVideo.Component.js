@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import YouTubePlayer from "youtube-player";
-import { VideoListService } from "../Services/VideoList.Service";
+import { VideoListService } from "../../services/VideoList.Service";
 import { addRelatedVideo } from "../RelatedToActualComponent/Related.Actions";
 import { setActualVideo } from "./ActualVideo.Actions";
 

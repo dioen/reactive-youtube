@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { setActualVideo } from "../ActualVideoComponent/ActualVideo.Actions";
 import { setRelatedFromUser } from "../RelatedToActualComponent/Related.Actions";
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-import { FoldersService } from "../Services/Folders.Service";
+import { FoldersService } from "../../services/Folders.Service";
 import { setUserActualFolder } from "../ShowUserSettingsComponent/ShowUserSettings.Actions";
 
 class VideoElementComponent extends Component {
