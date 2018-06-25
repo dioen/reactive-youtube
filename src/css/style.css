@@ -48,7 +48,7 @@ html {
 .nav-logo-img {
   box-sizing: border-box;
   height: 33px;
-  padding-top: 10px;
+  padding-top: 8px;
   padding-left: 10px;
   top: 10px;
   left: 20px;
@@ -67,6 +67,10 @@ html {
 .float-actual-video.active {
   display: block;
   z-index: 110;
+}
+
+.float-actual-video > .youtube-frame-wrapper {
+  position: static;
 }
 
 .float-actual-video > .actual-video-title {
@@ -130,6 +134,7 @@ html {
 }
 
 .search-form {
+  align-items: center;
   box-sizing: border-box;
   flex: 2 0 100%;
   order: 3;
@@ -138,8 +143,6 @@ html {
 
 .search-form > input {
   width: 89%;
-
-  height: 32px;
   font-size: 18px;
   font-style: italic;
   outline: none;
@@ -383,15 +386,9 @@ button {
 
 .logout-button {
   position: relative;
-    top: 10px;
   display: inline-block;
   cursor: pointer;
   margin-left: 10px;
-  z-index: 300;
-  border-radius: 90px !important;
-  width: 35px !important;
-  height: 35px;
-  font-size: 13px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
@@ -506,15 +503,15 @@ button {
 }
 
 .user-settings-list {
-  overflow: scroll;
+  margin: 0;
   list-style-type: none;
-  width: calc(100% + 17px);
   padding-right: 17px;
   background: #404040;
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.4);
 }
 
 .user-settings-wrapper {
+  margin-top: 10px;
   flex: 9;
   width: 100%;
   overflow-y: scroll;
@@ -523,6 +520,7 @@ button {
 
 .user-settings-list-element {
   padding: 7px 0;
+  padding-right: 10px;
   cursor: pointer;
 }
 
@@ -806,7 +804,7 @@ button {
 
 @media screen and (min-width: 768px) {
 .main-window-wrapper {
-  height: calc(100% - 55px);
+  height: calc(100% - 47px);
 }
 
 .medium-actual-video > .actual-video-title {
@@ -832,9 +830,7 @@ button {
 
 .search-form {
   flex: 20;
-  display: flex;
   order: 2;
-  padding: 10px;
 }
 
 .nav-logo-wrapper {
@@ -852,7 +848,7 @@ button {
 }
 
 .nav-logo-img {
-  height: 44px;
+  height: 40px;
 }
 
 .youtube-frame-wrapper {
