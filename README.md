@@ -26,9 +26,16 @@
   <li>user is notified with "related" video in right panel on every actual video change</li>
 </ol>
 </br>
+<h3>In future:</h3>
+<p>N/A yet, but you may expect a lot of new features in short time ;)</p>
+</br>
+<h3>Security satement:</h3>
+<p>User security is being protected and provided by Google directly. When user is logging in, Google is notifying user about access scope, in that case, about access only to files created with this application.</p>
+<p><strong>The application does not have any access to other users files!</strong></p>
+<p><strong>Do not modify user file created by the application on Google drive! Otherwise all user data will be lost!</strong></p>
+</br>
 <h3>Contribution:</h3>
-N/A yet.
-
+<p>N/A yet.</p>
 </br>
 </br>
 </br>
