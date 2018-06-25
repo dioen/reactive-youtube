@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import YouTubePlayer from "youtube-player";
-import { VideoListService } from "../Services/VideoListService";
+import { VideoListService } from "../Services/VideoList.Service";
 import { addRelatedVideo } from "../RelatedToActualComponent/Related.Actions";
-import { setActualVideo } from "./Actual.Video.Actions";
+import { setActualVideo } from "./ActualVideo.Actions";
 
 class ActualVideo extends Component {
   constructor(props) {

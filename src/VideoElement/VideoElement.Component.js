@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import { setActualVideo } from "../ActualVideoComponent/Actual.Video.Actions";
+import { setActualVideo } from "../ActualVideoComponent/ActualVideo.Actions";
 import { setRelatedFromUser } from "../RelatedToActualComponent/Related.Actions";
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-import { FoldersService } from "../Services/FoldersService";
+import { FoldersService } from "../Services/Folders.Service";
 import { setUserActualFolder } from "../ShowUserSettingsComponent/ShowUserSettings.Actions";
 
 class VideoElementComponent extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadVideosListSearched, loadVideosListUser } from "./Video.List.Actions";
-import VideoElementComponent from '../VideoElement/video-element.component';
+import { loadVideosListSearched, loadVideosListUser } from "./VideoList.Actions";
+import VideoElementComponent from '../VideoElement/VideoElement.Component';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 
 const SortableVideoElement = SortableElement(({ element, elementIndex }) =>

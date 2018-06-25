@@ -1,4 +1,4 @@
-import GoogleFileService from './GoogleFileService'
+import GoogleFileService from './GoogleFile.Service'
 
 export class FoldersService {
     constructor() {

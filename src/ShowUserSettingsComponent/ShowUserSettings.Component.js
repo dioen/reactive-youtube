@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import { setUserActualFolder } from './ShowUserSettings.Actions';
-import { FoldersService } from '../Services/FoldersService';
-import { setActualVideo } from '../ActualVideoComponent/Actual.Video.Actions';
+import { FoldersService } from '../Services/Folders.Service';
+import { setActualVideo } from '../ActualVideoComponent/ActualVideo.Actions';
 import { setRelatedFromUser } from '../RelatedToActualComponent/Related.Actions';
-import { loadVideosListUser } from '../VideoListComponent/Video.List.Actions';
+import { loadVideosListUser } from '../VideoListComponent/VideoList.Actions';
 
 class ShowUserSettingsComponent extends Component {
     constructor(props) {

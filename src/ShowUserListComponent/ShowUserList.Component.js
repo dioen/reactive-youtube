@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setUserActualFolder, loadUserSettings, setShowUserLists } from '../ShowUserSettingsComponent/ShowUserSettings.Actions';
-import { FoldersService } from '../Services/FoldersService';
+import { FoldersService } from '../Services/Folders.Service';
 
 class ShowUserListComponent extends Component {
     constructor(props) {

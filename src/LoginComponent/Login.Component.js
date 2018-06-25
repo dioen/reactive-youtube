@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login, logout } from './Login.Actions.js'
+import { login, logout } from './Login.Actions'
 
-import GoogleFileService from '../Services/GoogleFileService';
+import GoogleFileService from '../Services/GoogleFile.Service';
 import { initTestData } from '../folders_prot';
 
 class LoginComponent extends Component {
