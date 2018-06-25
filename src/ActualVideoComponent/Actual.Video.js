@@ -132,7 +132,9 @@ class ActualVideo extends Component {
           id=""
           onClick={(event) => { this.toggleRepeatActualVdieo(); this.toggleActiveClass(event) }}
         />
-        <div id="player" frameBorder="0" type="text/html" allowFullScreen />
+        <div className="youtube-frame-wrapper">
+          <div id="player" frameBorder="0" type="text/html" allowFullScreen />
+        </div>
         <div className="actual-video-title">
           {this.props.actualVideo.video_element.title}
         </div>

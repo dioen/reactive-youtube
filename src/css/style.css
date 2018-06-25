@@ -5,28 +5,53 @@
   color: #e8e8e8;
   font-family: 'Lato', sans-serif;
   font-size: 16px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  height: 0;
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+/* ::-webkit-scrollbar-thumb {
+  background: #FF0000;
+} */
+
 .main-window {
-  position: relative;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .main-window-wrapper {
-  position: relative;
-  top: 55px;
+  display: flex;
+  height: calc(100% - 88px);
+  position: fixed;
 }
 
 .nav-logo-wrapper {
-  top: 10px;
-  padding-left: 20px;
+  flex: 1;
+  order: 1;
 }
 
 .nav-logo-img {
-  height: 100%;
+  box-sizing: border-box;
+  height: 33px;
+  padding-top: 8px;
+  padding-left: 10px;
+  top: 10px;
+  left: 20px;
 }
 
 .float-actual-video {
@@ -44,6 +69,10 @@
   z-index: 110;
 }
 
+.float-actual-video > .youtube-frame-wrapper {
+  position: static;
+}
+
 .float-actual-video > .actual-video-title {
   display: none;
 }
@@ -51,11 +80,6 @@
 .medium-actual-video {
   display: none;
   position: relative;
-  width: calc(100% - 350px);
-  height: 625px;
-  left: 0;
-  bottom: 0;
-  transition: height 0.5s, width 0.5s;
   background-color: #0f0f0f;
   color: #c1c1c1;
 }
@@ -66,51 +90,60 @@
 }
 
 .medium-actual-video > .actual-video-title {
-  position: absolute;
-  bottom: 10px;
-  display: block;
+  position: relative;
+  bottom: 13px;
+  display: none;
   width: 100%;
   font-size: 17px;
   margin-left: 25px;
   margin-top: 25px;
 }
 
-#player {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.youtube-frame-wrapper {
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
 }
 
-.medium-actual-video > #player {
+.youtube-frame-wrapper iframe {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 580px;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
-.form-wrapper {
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   width: 100%;
   background: #292929;
-  position: fixed;
-  z-index: 101;
+  z-index: 102;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
+.user-profile-panel-wrapper {
+  flex: 1 0 0;
+  order: 2;
+  justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .search-form {
-  max-width: 900px;
-  position: relative;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  padding: 10px 10px;
+  align-items: center;
+  box-sizing: border-box;
+  flex: 2 0 100%;
+  order: 3;
+  padding: 6px;
 }
 
 .search-form > input {
-  width: 79%;
-  height: 32px;
+  width: 89%;
   font-size: 18px;
   font-style: italic;
   outline: none;
@@ -121,6 +154,7 @@
 }
 
 .search-button {
+  flex: 1;
   border-style: none;
   outline: none;
   background: #292929;
@@ -138,6 +172,10 @@
   margin-top: 25px;
 }
 
+.video-list-view-wrapper {
+  flex: 1;
+}
+
 .video-list-view {
   background: #444444;
   display: flex;
@@ -145,7 +183,6 @@
   flex-wrap: wrap;
   justify-content: space-around;
   min-height: 300px;
-  width: calc(100% - 350px);
   left: 0;
   position: relative;
   bottom: 0;
@@ -153,9 +190,9 @@
 
 .video-card {
   border-radius: 10px;
-  height: 218px;
-  width: 195px;
-  margin: 20px 0;
+  height: 83px;
+  width: 300px;
+  margin: 20px 10px;
   background: #666666;
   cursor: pointer;
   overflow: hidden;
@@ -183,9 +220,16 @@
 }
 
 .video-card > div > div > img {
-  position: relative;
-  height: 150px;
-  left: -33px;
+  /* position: relative; */
+  height: 83px;
+  float: left;
+  /* left: -33px; */
+}
+
+.video-card > div > div > img:after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 .video-title-wrapper {
@@ -198,7 +242,7 @@
   text-align: center;
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 10px;
+  padding-top: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -221,32 +265,67 @@ button {
 }
 
 .side-nav {
-  position: fixed;
-  top: 55px;
+  flex: 0 0 350px;
+  display: none;
+  flex-flow: column;
+  position: sticky;
+  overflow: hidden;
+  height: 100%;
   right: 0;
-  bottom: 0;
-  width: 350px;
+  z-index: 101;
   background-color: #333333;
+
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.4);
 }
 
+.side-nav.active {
+  display: flex;
+}
+
+.right-side-wrapper {
+  flex: 1 0 320px;
+  height: 100%;
+  overflow: scroll;
+}
+
 .next-video-wrapper {
+  flex: 1;
   position: relative;
   margin: 10px 0;
   height: 120px;
+  padding-left: 22px;
+}
+
+.next-video-wrapper:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.user-settings-panel-wrapper {
+  flex: 6;
+  display: flex;
+  flex-direction: column;
 }
 
 .next-video-image {
+  float: left;
   width: 80px;
-  display: inline-block;
+  margin-left: 15px;
 }
 
 .next-video-title {
+  float: left;
   width: 210px;
-  float: right;
   font-size: 14px;
-  padding-left: 12px;
+  margin-left: 12px;
 }
+
+/* .next-video-title:after {
+  display: block;
+  content: "";
+  clear: both;
+} */
 
 .next-video-title:hover {
   color: #FF0000;
@@ -265,6 +344,12 @@ button {
   cursor: pointer;
 }
 
+.next-video-card:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 .mobile-menu-icon {
   visibility: hidden;
   display: none;
@@ -279,9 +364,7 @@ button {
 
 #customBtn {
   position: relative;
-  left: 78px;
-  top: 10px;
-  display: inline-block;
+  top: 8px;
 }
 
 .abcRioButton {
@@ -290,7 +373,6 @@ button {
   z-index: 300;
   border-radius: 90px !important;
   width: 35px !important;
-  transition: all 0.5s ease-in !important;
   height: 35px;
   line-height: 35px;
   overflow: hidden;
@@ -305,16 +387,10 @@ button {
 
 .logout-button {
   position: relative;
-    top: 10px;
   display: inline-block;
   cursor: pointer;
-  margin-left: 10px;
-  z-index: 300;
-  border-radius: 90px !important;
-  width: 35px !important;
-  transition: all 0.5s ease-in !important;
-  height: 35px;
-  font-size: 13px;
+  margin-left: 7px;
+  top: 7px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
@@ -354,11 +430,12 @@ button {
 .user-profile-management-name {
   position: relative;
   display:inline-block;
+  top: -4px;
 }
 
 .replay-icon {
   position: absolute;
-  bottom: 3px;
+  bottom: -40px;
   right: 10px;
   font-size: 30px;
   z-index: 10;
@@ -374,10 +451,11 @@ button {
 
 .resize-icon {
   position: absolute;
-  bottom: 3px;
+  bottom: -40px;
   right: 50px;
   font-size: 30px;
   z-index: 10;
+  display: none;
 }
 
 .resize-icon:hover {
@@ -418,7 +496,6 @@ button {
   font-size: 17px;
   padding: 10px 0;
   cursor: pointer;
-  /* font-style: italic; */
   border-radius: 10px;
   font-weight: 200;
 }
@@ -429,26 +506,24 @@ button {
 }
 
 .user-settings-list {
+  margin: 0;
   list-style-type: none;
-  width: calc(100% + 17px);
-  min-height: 79%;
-  overflow-y: scroll;
   padding-right: 17px;
   background: #404040;
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.4);
 }
 
 .user-settings-wrapper {
+  margin-top: 10px;
+  flex: 9;
   width: 100%;
-  height: 100%;
   overflow-y: scroll;
-  overflow-x: hidden;
-  height: 79%;
   width: calc(100% + 17px);
 }
 
 .user-settings-list-element {
-  margin: 12px 0;
+  padding: 7px 0;
+  padding-right: 10px;
   cursor: pointer;
 }
 
@@ -460,6 +535,14 @@ button {
 
 .user-settings-list-element:hover {
   color: #FF0000;
+}
+
+.user-settings-folder {
+  flex: 0 0 35px;
+}
+
+.user-settings-panel-icons-wrapper {
+  display: flex;
 }
 
 .user-settings-folder-title {
@@ -619,13 +702,7 @@ button {
   top: 46px;
 
   box-shadow: 0 14px 28px rgba(0,0,0,0.9), 0 10px 10px rgba(0,0,0,0.5);
-}
-
-.user-subscriptionsto-list {
-  position: relative;
-  width: 455px;
-  height: 400px;
-  overflow: scroll;
+  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.9), 0 10px 10px rgba(0,0,0,0.5);
 }
 
 .user-subscriptionsto-list-wrapper.active {
@@ -635,10 +712,17 @@ button {
   color: #2e2e2e;
 }
 
+.user-subscriptionsto-list {
+  position: relative;
+  width: 455px;
+  height: 400px;
+  overflow: scroll;
+}
+
 .subscriptions-news-bell-icon-wrapper {
   display: inline-block;
     position: relative;
-    top: 2px;
+    top: 9px;
     color: #a1a1a1;
     font-size: 26px;
     cursor: pointer;
@@ -673,8 +757,8 @@ button {
 
 .subscription-new-video-card-wrapper {
   position: relative;
-    height: 135px;
-    display: flex;
+  height: 135px;
+  display: flex;
 }
 
 .subscription-new-video-card-wrapper:hover {
@@ -688,6 +772,7 @@ button {
 }
 
 .user-dashboard-tile-wrapper {
+  flex: 1;
   font-size: 25px;
   text-align: center;
   cursor: pointer;
@@ -707,23 +792,114 @@ button {
   margin-top: 20px;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (min-width: 960px) {
+
   .side-nav {
-    width: 0;
+    display: flex;
     position: relative;
+    flex: 0 0 350px;
   }
-  .side-nav.active {
-    width: 350px;
-    position: fixed;
-  }
+
+
+
+
+}
+
+@media screen and (min-width: 768px) {
+.main-window-wrapper {
+  height: calc(100% - 47px);
+}
+
+.medium-actual-video > .actual-video-title {
+  display: block;
+}
+
+.replay-icon {
+  bottom: 7px;
+}
+
+.resize-icon {
+  bottom: 7px;
+  display: block;
+}
+
+.user-profile-panel-wrapper {
+  flex: 2 0 170px;
+  margin-right: 10px;
+  order: 3;
+}
+
+.search-form {
+  flex: 20;
+  order: 2;
+}
+
+.nav-logo-wrapper {
+  flex: 1 0 145px;
+  order: 1;
+}
+
+.medium-actual-video {
+  height: auto;
+  width: 100%;
+}
+
+.actual-video-title {
+  display: block;
+}
+
+.nav-logo-img {
+  height: 40px;
+}
+
+.youtube-frame-wrapper {
+  position: relative;
+  height: 625px;
+  padding: 0;
+}
+
+.subscriptions-news-bell-icon-wrapper {
+    top: 9px;
+}
+
   .mobile-menu-icon {
     visibility: visible;
     display: inline;
   }
-  .search-form > input {
-    width: 69%;
-  }
+
+  /* .search-form > input {
+  flex: 9;
+
+  } */
+
   .video-list-view {
+    width: 100%;
+  }
+
+  .video-card {
+    border-radius: 10px;
+    height: 218px;
+    width: 195px;
+    margin: 20px 10px;
+    background: #666666;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+
+  .video-title {
+  padding-top: 10px;
+  }
+
+  .video-card > div > div > img {
+    position: relative;
+    height: 150px;
+    left: -33px;
+  }
+  
+  .video-title-wrapper {
+    height: 66px;
+    position: relative;
     width: 100%;
   }
 }
