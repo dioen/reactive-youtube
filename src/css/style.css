@@ -130,7 +130,8 @@ html {
   flex: 1 0 0;
   order: 2;
   justify-content: flex-end;
-
+  display: flex;
+  justify-content: flex-end;
 }
 
 .search-form {
@@ -190,7 +191,7 @@ html {
 .video-card {
   border-radius: 10px;
   height: 83px;
-  width: 333px;
+  width: 300px;
   margin: 20px 10px;
   background: #666666;
   cursor: pointer;
@@ -282,7 +283,7 @@ button {
 }
 
 .right-side-wrapper {
-  flex: 1 0 360px;
+  flex: 1 0 320px;
   height: 100%;
   overflow: scroll;
 }
@@ -388,7 +389,8 @@ button {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 7px;
+  top: 7px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
@@ -428,6 +430,7 @@ button {
 .user-profile-management-name {
   position: relative;
   display:inline-block;
+  top: -4px;
 }
 
 .replay-icon {
@@ -719,7 +722,7 @@ button {
 .subscriptions-news-bell-icon-wrapper {
   display: inline-block;
     position: relative;
-    top: 2px;
+    top: 9px;
     color: #a1a1a1;
     font-size: 26px;
     cursor: pointer;
@@ -822,8 +825,6 @@ button {
 
 .user-profile-panel-wrapper {
   flex: 2 0 170px;
-  display: flex;
-  justify-content: flex-end;
   margin-right: 10px;
   order: 3;
 }
