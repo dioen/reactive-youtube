@@ -38,26 +38,17 @@ class MainComponent extends Component {
     }
 
     onLeftSwipe = () => {
-        // alert('udalo sie! LEFT');
-
         const sideNavTag = document.getElementById('side-nav-id');
         sideNavTag.classList.add('active');
     }
 
     onRightSwipe = () => {
-        // alert('udalo sie! RIGHT');
-
         const sideNavTag = document.getElementById('side-nav-id');
         sideNavTag.classList.remove('active');
     }
 
     componentDidMount = () => {
         const bodyTag = document.getElementById('App');
-        // const swipeLeftOptions = {
-        //     event: 'swipeleft',
-        //     treshold: '15',
-        //     velocity: '0.3'
-        // }
         const swipe = new Hammer.Manager(bodyTag, {
             touchAction: 'auto',
             inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput,
