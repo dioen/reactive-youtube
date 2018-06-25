@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GoogleFileService from '../../services/GoogleFileService';
-import { FoldersService } from '../../services/FoldersService';
 import { loadUserSettings, setUserActualFolder } from '../ShowUserSettingsComponent/ShowUserSettings.Actions';
+import { FoldersServiceHoc } from '../../coreHocs/FoldersService.Hoc';
 
 class AddToListComponent extends Component {
     constructor(props) {
         super(props)
 
-        this._FoldersService = new FoldersService();
         this._Service = new GoogleFileService();
         this.element = this.props.element;
 
@@ -22,13 +21,13 @@ class AddToListComponent extends Component {
     }
 
     addElement = (elementName) => {
-        this._FoldersService.addItemToFolder(this.state.folders_lists.googleFileContent.settings, this.element, elementName, this.props.google_file_id)
-            .then(reponse => this._FoldersService.getFolder(this.props.google_file_id, this.props.user_actual_folder.absolute_path)
+        this.props.FoldersService.addItemToFolder(this.state.folders_lists.googleFileContent.settings, this.element, elementName, this.props.google_file_id)
+            .then(reponse => this.props.FoldersService.getFolder(this.props.google_file_id, this.props.user_actual_folder.absolute_path)
                 .then(response => this.props.setUserActualFolder(this.props.user_actual_folder.absolute_path)))
     }
 
     getMenu = () => {
-        this._FoldersService.getAllFoldersList(this.props.google_file_id)
+        this.props.FoldersService.getAllFoldersList(this.props.google_file_id)
             .then(response => {
                 this.setState({
                     folders_lists: {
@@ -96,4 +95,5 @@ const mapDispatchToProps = dispatch => ({
     setUserActualFolder: actualFolder => { dispatch(setUserActualFolder(actualFolder)) }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddToListComponent);
+const AddToListComponentHOC = FoldersServiceHoc(AddToListComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(AddToListComponentHOC);

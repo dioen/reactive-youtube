@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setUserActualFolder, loadUserSettings, setShowUserLists } from '../ShowUserSettingsComponent/ShowUserSettings.Actions';
-import { FoldersService } from '../../services/Folders.Service';
+import { FoldersServiceHoc } from '../../coreHocs/FoldersService.Hoc';
 
 class ShowUserListComponent extends Component {
     constructor(props) {
         super(props)
-
-        this._FoldersService = new FoldersService();
     }
 
     createFolder = () => {
-        this._FoldersService.getFolder(this.props.user_login.google.google_file_id).then(response => {
-            this._FoldersService.createFolder("test", "testFolderName", this.props.user_login.google.google_file_id);
+        this.props.FoldersService.getFolder(this.props.user_login.google.google_file_id).then(response => {
+            this.props.FoldersService.createFolder("test", "testFolderName", this.props.user_login.google.google_file_id);
         });
     }
 
     loadUserList = () => {
-        this._FoldersService.getGoogleFileContent(this.props.user_login.google.google_file_id)
+        this.props.FoldersService.getGoogleFileContent(this.props.user_login.google.google_file_id)
             .then(response => {
                 this.props.loadUserSettings(response.settings);
             })
@@ -65,4 +63,5 @@ const mapDispatchToProps = dispatch => ({
     setShowUserLists: showUserLists => { dispatch(setShowUserLists(showUserLists)) }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowUserListComponent);
+const ShowUserListComponentHOC = FoldersServiceHoc(ShowUserListComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowUserListComponentHOC);

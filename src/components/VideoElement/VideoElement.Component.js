@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { setActualVideo } from "../ActualVideoComponent/ActualVideo.Actions";
 import { setRelatedFromUser } from "../RelatedToActualComponent/Related.Actions";
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-import { FoldersService } from "../../services/Folders.Service";
 import { setUserActualFolder } from "../ShowUserSettingsComponent/ShowUserSettings.Actions";
+import { FoldersServiceHoc } from '../../coreHocs/FoldersService.Hoc';
 
 class VideoElementComponent extends Component {
     constructor(props) {
@@ -15,12 +15,10 @@ class VideoElementComponent extends Component {
             context_menu_options: [],
             googleFileContent: {}
         };
-
-        this._FoldersService = new FoldersService();
     }
 
     addItemToFolder = (folderName, videoElement) => {
-        this._FoldersService
+        this.props.FoldersService
             .addItemToFolder(
                 this.props.user_settings.settings,
                 videoElement,
@@ -28,7 +26,7 @@ class VideoElementComponent extends Component {
                 this.props.google_file_id
             )
             .then(reponse =>
-                this._FoldersService
+                this.props.FoldersService
                     .getFolder(
                         this.props.google_file_id,
                         this.props.user_settings.user_actual_folder[0].absolute_path
@@ -42,7 +40,7 @@ class VideoElementComponent extends Component {
     }
 
     loadContextMenuElements = () => {
-        this._FoldersService
+        this.props.FoldersService
             .getAllFoldersList(this.props.google_file_id)
             .then(response => {
                 this.setState({
@@ -139,4 +137,5 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VideoElementComponent);
+const VideoElementComponentHOC = FoldersServiceHoc(VideoElementComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(VideoElementComponentHOC);

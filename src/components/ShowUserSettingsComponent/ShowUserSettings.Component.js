@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import { setUserActualFolder } from './ShowUserSettings.Actions';
-import { FoldersService } from '../../services/Folders.Service';
 import { setActualVideo } from '../ActualVideoComponent/ActualVideo.Actions';
 import { setRelatedFromUser } from '../RelatedToActualComponent/Related.Actions';
 import { loadVideosListUser } from '../VideoListComponent/VideoList.Actions';
+import { FoldersServiceHoc } from '../../coreHocs/FoldersService.Hoc';
 
 class ShowUserSettingsComponent extends Component {
     constructor(props) {
@@ -19,17 +19,15 @@ class ShowUserSettingsComponent extends Component {
                 value: ""
             }
         }
-
-        this._FolderService = new FoldersService();
     }
 
     createFolder = () => {
         const folderNamePrompt = prompt("Wprowadź nazwę folderu");
 
         (folderNamePrompt.length > 0) ?
-            this._FolderService.createFolder(this.props.user_settings.settings,
+            this.props.FoldersService.createFolder(this.props.user_settings.settings,
                 this.props.user_settings.user_actual_folder[0].absolute_path, folderNamePrompt, this.props.google_file_id)
-                .then(() => this._FolderService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
+                .then(() => this.props.FoldersService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
                     .then(response => this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path)))
             :
             null
@@ -95,16 +93,16 @@ class ShowUserSettingsComponent extends Component {
     }
 
     removeFolder = (event) => {
-        this._FolderService.removeFolder(this.props.user_settings.settings,
+        this.props.FoldersService.removeFolder(this.props.user_settings.settings,
             this.props.user_settings.user_actual_folder[0].absolute_path, this.state.rightClickedElementCached.value, this.props.google_file_id)
-            .then(response => this._FolderService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
+            .then(response => this.props.FoldersService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
                 .then(response => this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path)));
     }
 
     removeItem = () => {
-        this._FolderService.removeItemFromFolder(this.props.user_settings.settings,
+        this.props.FoldersService.removeItemFromFolder(this.props.user_settings.settings,
             this.state.rightClickedElementCached.id, this.props.user_settings.user_actual_folder[0].absolute_path, this.props.google_file_id)
-            .then(response => this._FolderService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
+            .then(response => this.props.FoldersService.getFolder(this.props.google_file_id, this.props.user_settings.user_actual_folder[0].absolute_path)
                 .then(response => this.props.setUserActualFolder(this.props.user_settings.user_actual_folder[0].absolute_path)));
     }
 
@@ -153,4 +151,5 @@ const mapDispatchToProps = dispatch => ({
     setRelatedFromUser: videoObject => { dispatch(setRelatedFromUser(videoObject)) }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowUserSettingsComponent);
+const ShowUserSettingsComponentHOC = FoldersServiceHoc(ShowUserSettingsComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowUserSettingsComponentHOC);
