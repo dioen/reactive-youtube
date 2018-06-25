@@ -40,9 +40,9 @@ class ShowUserListComponent extends Component {
         return (
             <div className="user-settings-folder">
                 {(this.props.user_login.google.logged_in) ?
-                    (<div className="col-md-12 margin-top-20">
-                        <div className="icon-cog user-dashboard-tile-wrapper col-xs-6" title="Jeszcze nie działam... :(" onClick={this.setActiveClass}></div>
-                        <div className="icon-th-list user-dashboard-tile-wrapper col-xs-6" onClick={(e) => {
+                    (<div className="margin-top-20 user-settings-panel-icons-wrapper">
+                        <div className="icon-cog user-dashboard-tile-wrapper" title="Jeszcze nie działam... :(" onClick={this.setActiveClass}></div>
+                        <div className="icon-th-list user-dashboard-tile-wrapper" onClick={(e) => {
                             this.setActiveClass(e);
                             this.loadUserList();
                         }}></div>
