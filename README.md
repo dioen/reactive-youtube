@@ -32,7 +32,7 @@
 <h3>Security satement:</h3>
 <p>User security is being protected and provided by Google directly. When user is logging in, Google is notifying user about access scope, in that case, about access only to files created with this application.</p>
 <p><strong>The application does not have any access to other users files!</strong></p>
-<p><strong>Do not modify user file created by the application on Google drive! Otherwise all user data will be lost!</strong></p>
+<p><strong>Do not modify user file created by the application on Google drive! Otherwise all reactiveYoutube user data will be lost!</strong></p>
 </br>
 <h3>Contribution:</h3>
 <p>N/A yet.</p>
